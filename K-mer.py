@@ -1,5 +1,7 @@
 #!/usr/bin/env python3 #make sure it runs python 3 
 
+#Test and get all of the kmer outputs for the example sequence
+
 list_nucleotides = "ATGTCTGTCTGAA" #defining the list of nucleotides 
 k = 2 #set k to give an output of 2
 
@@ -13,37 +15,24 @@ def list_kmers(list_nucleotides, k): #this defines the function to list all of t
 print(list_kmers(list_nucleotides, k)) #this line prints all of the kmers possible 
 
 ##############################################################
+#Question 1
 
 unique_list_nucleotides = "ATGTCTGTCTGAA" #defining the list of nucleotides 
 k = 2 #set k to give an output of 2
 
-def unique_list_kmers(unique_list_nucleotides, k): #this creates a function that outputs only unique kmers from a list
-  unique_get_kmers = {} #this makes an empty list to store unique kmers 
-  for i in range(len(unique_list_nucleotides) - k + 1): #determines the number of iterations needed to find each set of kmer values 
-    unique_kmer = unique_list_nucleotides[i:i+k] #this line gathers kmers based on k, and assigns them to the unique_kmer function
-    if unique_kmer not in unique_get_kmers:#this if statement checks to see if the kmer in the loop has already been seen 
-      unique_get_kmers.append(unique_kmer) #only if the kmer is not in the list, then it is added to the list
-  return unique_get_kmers # this line "returns" all of the unique kmers in the list 
+def unique_list_kmers(unique_list_nucleotides, k): #this takes the DNA sequence from the file and the k = 2 value to give a dictionary matching this criteria 
+    substring_dict = {} ##this creates an empty dictionary that stores the information from DNA_sequence and k
+    for i in range(len(unique_list_nucleotides) - k + 1):  # this makes a loop by searching through the list of nucleotides example using the k value
+        substring = unique_list_nucleotides[i:i+k] #this stores the kmer in the nucleotide list 
+        if substring not in substring_dict: #this checks if the kmer found in the loop is in the dictionary and if it is not in the list it gets added
+            substring_dict[substring] = set() ##continuation of the kmer being added to the list if it was not already added
+        if i+k < len(unique_list_nucleotides): #this checks to see if the subsequent kmer is in the list, and if it is not it gets added to the dictionary
+            substring_dict[substring].add(unique_list_nucleotides[i+1:i+k+1]) #continuation of the subsequent kmer being added to the dictionary if it is not added already
+    return substring_dict #this returns the dictionary using the example nucleotide sequence and the k value
 
-print(unique_list_kmers(unique_list_nucleotides, k)) #this prints the unique kmers 
+kmer_dict = unique_list_kmers(unique_list_nucleotides, k) #kmer_dict is created using unique kmer sequences and the k value that was defined above
   
-#################################################################################
-
-list_nucleotides = "ATGTCTGTCTGAA" #defining the list of nucleotides 
-k = 2 #set k to give an output of 2
-
-def subsequent_list(list_nucleotides, k):
-  check_next = []
-    for i in range(len(unique_list_nucleotides) - k + 1): #determines the number of iterations needed to find each set of kmer values 
-      unique_kmer = unique_list_nucleotides[i:i+k]
-      if unique_kmer not in unique_get_kmers:
-        unique_get_kmers.append(unique_kmer)
-        
-      
-      #sort by next letter 
-      #see if the next letter is unique 
-      #if it is unique then add it to the list and go to the next to see if that is still unique 
-    
-    
+for kmer in kmer_dict.keys(): #another loop is started to go through each kmer in the dictionary
+  subsequent_kmers = kmer_dict[kmer] #this line matches kmers with their possible subsequent kmers 
+  print(f"K-mer: {kmer}, Subsequent K-mers: {subsequent_kmers}") #kmers and their subsequent kmers are printed out in the complete_kmer list
   
-
