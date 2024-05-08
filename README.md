@@ -7,3 +7,4 @@ There will be a couple of different files in this repository! In the **K-mer.py 
 Another file that you will find in this repository us called **ReadingFileKmer.py**. This code reads a specific file (reads.fa) containing DNA sequences. The following code was developed to identify all possible kmers, and additionally all possible subsequent kmers. 
 In the same file, there is another section of code for Question 3, which identifies the value of k where every substring has only one possible substring that follows it. The function called smallest_k_value identifies the smallest value using the previous functions. 
 
+Laslty, you will notice a file called **test.py**. This file has been created to make sure that no matter what the input is for the defined functions, it should run as expected without error. Feel free to use your own tests, or the ones from this file. 
